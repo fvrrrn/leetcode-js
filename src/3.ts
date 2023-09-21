@@ -48,23 +48,3 @@ export const lengthOfLongestSubstring = (s: string): number => {
   }
   return count + 1
 }
-
-// 12324
-
-// 1.
-// left=0
-// right=2
-// table={1: 0}
-// i=1 rv=undefined iffalse right=3 table{...,2: 1}
-// i=2 rv=undefined iffalse right=4 table{...,3: 2}
-// i=3 rv=1 iftrue count=right-left left=rt+1 right=left+1 table{...,2: 3}
-
-// bbb
-
-// 1.
-// left=0
-// right=1
-// table={b: 0}
-// i=1 rv=0 iffalse right=3 table{...,2: 1}
-// i=2 rv=undefined iffalse right=4 table{...,3: 2}
-// i=3 rv=1 iftrue count=right-left left=rt+1 right=left+1 table{...,2: 3}
