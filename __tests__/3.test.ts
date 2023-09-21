@@ -15,3 +15,7 @@ it('returns 3 with s equals "pwwkew"', () => {
 it('returns 3 with s equals "dvdf"', () => {
   expect(lengthOfLongestSubstring('dvdf')).toEqual(3)
 })
+
+it('returns 2 with s equals "au"', () => {
+  expect(lengthOfLongestSubstring('au')).toEqual(2)
+})

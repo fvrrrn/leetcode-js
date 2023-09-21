@@ -29,17 +29,42 @@
 // s consists of English letters, digits, symbols and spaces.
 
 export const lengthOfLongestSubstring = (s: string): number => {
-  const group = new Set()
+  const table = { [s[0]]: 0 }
   let count = 0
-  for (let i = 0; i < s.length; i++) {
-    for (let j = i; j < s.length; j++) {
-      if (group.has(s[j])) {
-        count = Math.max(count, group.size)
-        group.clear()
-        break
-      }
-      group.add(s[j])
+
+  let v: number
+  for (let left = 0, right = 1; right < s.length; ) {
+    count = right - left > count ? right - left : count
+    v = table[s[right]]
+    if (v >= left) {
+      // if (d > 1) {
+      // }
+      left = v + 1
+      right = left + 1
+    } else {
+      right++
     }
+    table[s[right]] = right
   }
-  return Math.max(count, group.size)
+  return count + 1
 }
+
+// 12324
+
+// 1.
+// left=0
+// right=2
+// table={1: 0}
+// i=1 rv=undefined iffalse right=3 table{...,2: 1}
+// i=2 rv=undefined iffalse right=4 table{...,3: 2}
+// i=3 rv=1 iftrue count=right-left left=rt+1 right=left+1 table{...,2: 3}
+
+// bbb
+
+// 1.
+// left=0
+// right=1
+// table={b: 0}
+// i=1 rv=0 iffalse right=3 table{...,2: 1}
+// i=2 rv=undefined iffalse right=4 table{...,3: 2}
+// i=3 rv=1 iftrue count=right-left left=rt+1 right=left+1 table{...,2: 3}
