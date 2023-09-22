@@ -28,20 +28,26 @@ export const findMedianSortedArrays = (
   nums1: number[],
   nums2: number[],
 ): number => {
-  const medianIndex = Math.floor((nums1.length + nums2.length) / 2)
-  let left = 0
-  let right = 0
   let median = 0
+  let prevMedian = 0
 
-  while (left + right <= medianIndex) {
+  for (
+    let left = 0, right = 0;
+    left + right <= Math.floor((nums1.length + nums2.length) / 2);
+
+  ) {
     if (nums1[left] < nums2[right]) {
+      prevMedian = median
       median = nums1[left]
       left++
     } else {
+      prevMedian = median
       median = nums2[right]
       right++
     }
   }
 
-  return median
+  return (nums1.length + nums2.length) % 2 === 0
+    ? (prevMedian + median) / 2
+    : median
 }
