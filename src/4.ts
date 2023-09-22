@@ -36,7 +36,7 @@ export const findMedianSortedArrays = (
     left + right <= Math.floor((nums1.length + nums2.length) / 2);
 
   ) {
-    if (nums1[left] < nums2[right]) {
+    if (nums1[left] < nums2[right] || right >= nums2.length) {
       prevMedian = median
       median = nums1[left]
       left++
