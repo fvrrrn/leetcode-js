@@ -25,34 +25,37 @@
 // Explanation: The decoded string is "a" repeated 8301530446056247680 times.
 // The 1st letter is "a".
 
-// class LinkedListNode {
-//   val: number
-//   next: LinkedListNode | null
-//   constructor(val?: number, next?: LinkedListNode | null) {
-//     this.val = val === undefined ? 0 : val
-//     this.next = next === undefined ? null : next
-//   }
-// }
-
 export const decodeAtIndex = (s: string, k: number): string => {
-  let decoded = ''
-  let repeated = decoded
+  let size: number = 0
 
-  for (let i = 0, r = 0; decoded.length < k; ) {
-    if (r > 1) {
-      decoded += repeated
-      r--
+  // Calc the size of dec str
+  for (const l of s) {
+    size = isNaN(+l) ? size + 1 : +l * size
+  }
+
+  // s = leet2code3
+  // decodedS = leetleetcodeleetleetcodeleetleetcode, size = 36
+  // k = 10
+  // k = 10 % 36 => 10
+
+  // step 1: k = 10, size = 12 (size /= 3), leet2code[3]
+  // step 2: k = 10, size = 11, leet2cod[e]3
+  // step 3: k = 10, size = 10, leet2co[d]e3
+  // step 4: k = 0 => return leet2c[o]de3
+
+  // Traverse the string backward to find the k-th character
+  for (let i: number = s.length - 1; i >= 0; i--) {
+    const l: string = s[i]
+    k %= size
+
+    if (k === 0 && isNaN(+l)) {
+      return l
+    } else if (!isNaN(+l)) {
+      size /= +l
     } else {
-      r = parseInt(s[i])
-      if (r > 0) {
-        repeated = decoded
-        i++
-      } else {
-        decoded += s[i]
-        i++
-      }
+      size--
     }
   }
 
-  return decoded[k - 1]
+  return s[1]
 }
