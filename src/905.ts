@@ -19,21 +19,15 @@ export const sortArrayByParity = (nums: number[]): number[] => {
   if (nums.length === 0) return []
   if (nums.length === 1) return nums
 
-  for (let left = 0, right = nums.length - 1; left <= right; ) {
-    if (nums[left] % 2 > 0) {
-      if (nums[right] % 2 <= 0) {
-        nums[left] += nums[right]
-        nums[right] = nums[left] - nums[right]
-        nums[left] -= nums[right]
-        left++
-        right--
-      } else {
-        right--
+  for (let i = 0, j = 0; j < nums.length; j++) {
+    if (nums[j] % 2 === 0) {
+      if (i !== j) {
+        nums[i] += nums[j]
+        nums[j] = nums[i] - nums[j]
+        nums[i] -= nums[j]
       }
-    } else {
-      left++
+      i++
     }
   }
-
   return nums
 }
