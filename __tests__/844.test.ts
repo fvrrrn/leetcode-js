@@ -1,5 +1,13 @@
-import { sortArrayByParity } from '../src/905.js'
+import { backspaceCompare } from '../src/844.js'
 
-it('returns [4,2,1,3] with nums [3,1,2,4]', () => {
-  expect(sortArrayByParity([3, 1, 2, 4])).toEqual([2, 4, 3, 1])
+it('returns true with s = "ab#c", t = "ad#c"', () => {
+  expect(backspaceCompare('ab#c', 'ad#c')).toEqual(true)
+})
+
+it('returns true with s = "ab##", t = "c#d#"', () => {
+  expect(backspaceCompare('ab##', 'c#d#')).toEqual(true)
+})
+
+it('returns false with s = "a#c", t = "b"', () => {
+  expect(backspaceCompare('a#c', 'b')).toEqual(false)
 })
