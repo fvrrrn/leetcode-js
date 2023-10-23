@@ -17,19 +17,21 @@
 // strs[i] consists of only lowercase English letters.
 
 export const longestCommonPrefix = (strs: string[]): string => {
-  let prefix = ''
-  let minLength = strs[0].length
-
-  for (let i = 0; i < minLength; i++) {
-    const maybePrefix = strs[0][i]
-    for (let j = 0; j < strs.length; j++) {
-      if (strs[j][i] !== maybePrefix) return prefix
-
-      if (strs[j].length < minLength) minLength = strs[j].length
-    }
-
-    prefix += maybePrefix
+  let firstWord = strs[0]
+  let lastWord = strs[strs.length - 1]
+  for (let i = 0; i < strs.length; i++) {
+    if (strs[i] < firstWord) firstWord = strs[i]
+    if (strs[i] > lastWord) lastWord = strs[i]
   }
 
-  return prefix
+  const output = []
+  for (let i = 0; i < firstWord.length; i++) {
+    if (firstWord[i] == lastWord[i]) {
+      output.push(firstWord[i])
+    } else {
+      break
+    }
+  }
+
+  return output.join('')
 }
