@@ -15,14 +15,6 @@
 // Given a binary tree. Print its nodes
 // in level order using array for implementing queue
 
-class LinkedListNode<T> {
-  value: T
-  next: LinkedListNode<T>
-  constructor(value: T) {
-    this.value = value
-  }
-}
-
 export class TreeNode {
   val: number
   left: TreeNode | null
@@ -35,65 +27,18 @@ export class TreeNode {
 }
 
 export const largestValues = (root: TreeNode | null): number[] => {
-  if (root == null) return []
-  if (root.left == null && root.right == null) return [root.val]
-
-  const listRoot = new LinkedListNode(root)
-  const maxes = []
-
-  let currentRoot = listRoot
-  let flag = true
-  while (flag) {
-    flag = false
-    let current = currentRoot
-    let max = currentRoot.value.val
-    for (let i = 0; current != null; i++) {
-      if (i === 0) currentRoot = current
-
-      // find max
-      max = max < current.value.val ? current.value.val : max
-      if (current?.value.left && current?.value.right) {
-        /**
-         * replace current node with its children
-         * tree piece:
-         * 2
-         * | \
-         * 1   4 are linked list nodes
-         * |\  |\
-         * 2 3 7 8
-         */
-
-        // Example:
-        // a) 1 -> 4
-        // b) 2 -> 4
-        const node = new LinkedListNode(current.value.right)
-        current.value = current.value.left
-        const oldNext = current.next
-        // c) 2 -> 3 -> 4
-        node.next = oldNext
-        current.next = node
-        current = node.next
-
-        flag = true
-
-        continue
-      }
-
-      if (current?.value.left) {
-        current.value = current.value.left
-        flag = true
-      }
-
-      if (current?.value.right) {
-        current.value = current.value.right
-        flag = true
-      }
-
-      current = current?.next
+  const result: number[] = []
+  let queue = root ? [root] : []
+  while (queue.length > 0) {
+    const next = []
+    let max = -Infinity
+    for (const node of queue) {
+      if (node.val > max) max = node.val
+      if (node.left) next.push(node.left)
+      if (node.right) next.push(node.right)
     }
-
-    maxes.push(max)
+    result.push(max)
+    queue = next
   }
-
-  return maxes
+  return result
 }
