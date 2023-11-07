@@ -1,6 +1,6 @@
 import { SeatManager } from '../src/1845.js'
 
-it('returns [5,7,2,3,2] for pref=[5,2,0,3,1]', () => {
+it('passes test for SeatManager', () => {
   const seatManager = new SeatManager(5)
   expect(seatManager.reserve()).toBe(1) // All seats are available, so return the lowest numbered seat, which is 1.
   expect(seatManager.reserve()).toBe(2) // The available seats are [2,3,4,5], so return the lowest of them, which is 2.
