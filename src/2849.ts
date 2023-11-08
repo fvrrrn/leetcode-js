@@ -8,10 +8,7 @@ export const isReachableAtTime = (
   t: number,
 ): boolean => {
   if (sx === fx && sy === fy && t === 1) return false
-  const yDiff = Math.abs(sy - fy)
-  let xDiff = Math.abs(sx - fx) - yDiff
-  xDiff = xDiff < 0 ? 0 : xDiff
-  return t >= yDiff + xDiff
+  return t >= Math.max(Math.abs(sx - fx), Math.abs(sy - fy))
 }
 
 // yDiff + sx-fx - yDiff
